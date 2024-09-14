@@ -8,7 +8,6 @@ export default function About() {
           <ol className="gallery_slider">
             <img src="images/Confusion_matrix.png" alt="" loading="lazy" className="gallery-image" />
             <img src="images/cr,logloss,acc,f1score.png" alt="" loading="lazy" className="gallery-image" />
-            <img src="images/Precision-Recall curve.png" alt="" loading="lazy" className="gallery-image" />
             <img src="images/train_graph.png" alt="" loading="lazy" className="gallery-image" />
           </ol>
         </div>

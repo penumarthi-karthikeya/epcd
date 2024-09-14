@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import axios from 'axios';
 
 const Prediction = () => {
   const [fileName, setFileName] = useState('');
@@ -7,17 +8,23 @@ const Prediction = () => {
   const [uploadStatus, setUploadStatus] = useState('');
   const [predictionResult, setPredictionResult] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false); // State to show spinner
   const [selectedFile, setSelectedFile] = useState(null);
-  const [errorDetails, setErrorDetails] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const fileInputRef = useRef(null);
   const dropContainerRef = useRef(null);
+  const spinnerTimeoutRef = useRef(null); // Ref to hold the timeout ID
 
-  const supportedFileTypes = ['image/jpeg', 'image/png', 'image/gif'];
+  const supportedFileTypes = ['image/jpeg', 'image/png'];
 
   useEffect(() => {
     return () => {
       if (fileURL) {
         URL.revokeObjectURL(fileURL);
+      }
+      // Clean up the spinner timeout if the component unmounts before timeout completes
+      if (spinnerTimeoutRef.current) {
+        clearTimeout(spinnerTimeoutRef.current);
       }
     };
   }, [fileURL]);
@@ -29,9 +36,9 @@ const Prediction = () => {
       setFileURL(URL.createObjectURL(file));
       setShowFileDetails(true);
       setSelectedFile(file);
-      setErrorDetails('');
+      setErrorMessage('');
     } else {
-      setErrorDetails('Please upload a supported image file (JPEG, PNG, or GIF).');
+      setErrorMessage('Please upload a supported image file (JPEG, PNG).');
       handleClearFile();
     }
   };
@@ -49,8 +56,9 @@ const Prediction = () => {
     setUploadStatus('');
     setPredictionResult('');
     setLoading(false);
+    setShowSpinner(false); // Ensure spinner is hidden when clearing the file
     setSelectedFile(null);
-    setErrorDetails('');
+    setErrorMessage('');
   };
 
   const handleDragOver = (event) => {
@@ -72,78 +80,88 @@ const Prediction = () => {
         dataTransfer.items.add(file);
         fileInputRef.current.files = dataTransfer.files;
       }
-      setFileName(file.name);
       setFileURL(URL.createObjectURL(file));
       setShowFileDetails(true);
       setSelectedFile(file);
-      setErrorDetails('');
+      setErrorMessage('');
+      setFileName(file.name);
     } else {
-      setErrorDetails('Please upload a supported image file (JPEG, PNG, or GIF).');
+      setErrorMessage('Please upload a supported image file (JPEG, PNG).');
     }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     if (!selectedFile) {
-      setErrorDetails("No file selected.");
+      setErrorMessage("No file selected.");
       return;
     }
-  
+
     const formData = new FormData();
     formData.append('file', selectedFile, fileName);
-  
-    setLoading(true); 
+
+    setLoading(true);
+    setShowSpinner(true); // Show spinner immediately
     setPredictionResult('');
     setUploadStatus('');
-    setErrorDetails('');
-  
+    setErrorMessage('');
+
+    // Start timeout for spinner
+    spinnerTimeoutRef.current = setTimeout(() => {
+      setShowSpinner(true);
+    }, 1000); // Make sure spinner is visible immediately
+
     try {
-      console.log("Sending request to http://localhost:1002/predict...");
-      const response = await fetch('http://localhost:1002/predict', {
-        method: 'POST',
-        body: formData,
-        mode: 'cors',
+      const response = await axios.post('http://localhost:1001/predict', formData, {
         headers: {
           'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data',
         },
       });
-  
-      console.log("Response status:", response.status);
-      console.log("Response headers:", response.headers);
-  
-      if (response.ok) {
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.indexOf("application/json") !== -1) {
-          const data = await response.json();
-          console.log("Response received:", data);
-          setLoading(false);
-          setUploadStatus('Upload successful!');
+
+      if (response.status === 200) {
+        const data = response.data;
+
+        // Clear timeout if prediction is successful before delay
+        if (spinnerTimeoutRef.current) {
+          clearTimeout(spinnerTimeoutRef.current);
+        }
+
+        setLoading(false);
+        setShowSpinner(true); // Ensure spinner is still visible during the delay
+        setUploadStatus('Upload successful!');
+
+        // Add delay before setting prediction result
+        setTimeout(() => {
           if (data.predicted_class) {
             setPredictionResult(data.predicted_class);
           } else {
-            console.error("Unexpected response format:", data);
-            setErrorDetails("Unexpected response format from server.");
+            setErrorMessage("Unexpected response format from server.");
           }
-        } else {
-          console.error("Unexpected content type:", contentType);
-          setErrorDetails("Unexpected response type from server.");
-        }
+          setShowSpinner(false); // Hide spinner after result is set
+        }, 0); // 2-second delay for result display
+
       } else {
-        const errorText = await response.text();
-        throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
     } catch (error) {
       setLoading(false);
+      setShowSpinner(false); // Hide spinner on error
       setUploadStatus('Error uploading file. Please try again.');
-      
-      let errorMessage = error.message;
-      if (error.message.includes('Failed to fetch')) {
-        errorMessage = 'Unable to connect to the server. Please check if the server is running and accessible.';
+
+      let errorMsg = 'An error occurred. Please try again later.';
+      if (error.response) {
+        if (error.response.status === 503) {
+          errorMsg = 'Service is currently unavailable. Please try again later.';
+        } else {
+          errorMsg = error.response.data || 'An error occurred. Please try again later.';
+        }
+      } else if (error.message.includes('Network Error')) {
+        errorMsg = 'This service has been stoped by team,contact them to start this service.';
       }
-      
-      setErrorDetails(`Error details: ${errorMessage}`);
-      console.error('Error:', error);
+
+      setErrorMessage(errorMsg);
     }
   };
 
@@ -154,15 +172,14 @@ const Prediction = () => {
           {!showFileDetails && (
             <>
               <span className="form-title">Upload your Pancreas MRI</span>
-              <p className="form-paragraph">File should be a JPEG, PNG, or GIF image</p>
-              <br />
+              <p className="form-paragraph">File should be a JPEG or PNG image</p>
               <label htmlFor="file-input" className="drop-container" ref={dropContainerRef}
                 onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}
                 aria-describedby="file-input-description">
                 <span className="drop-title">Drop file here</span> or
                 <input
                   type="file"
-                  accept="image/jpeg,image/png,image/gif"
+                  accept="image/jpeg,image/png"
                   required
                   id="file-input"
                   name="file"
@@ -171,9 +188,6 @@ const Prediction = () => {
                   aria-label="Choose a file to upload"
                 />
               </label>
-              <p id="file-input-description" className="sr-only">
-                Accepted file types are JPEG, PNG, and GIF. You can drag and drop a file here or click to select a file.
-              </p>
             </>
           )}
           {showFileDetails && (
@@ -190,27 +204,14 @@ const Prediction = () => {
               <span className="file-name">{fileName}</span>
             </div>
           )}
-          <br />
           <button type="submit" className="button type1" disabled={!selectedFile || loading}>
             <span className="btn-txt">{loading ? 'Predicting...' : 'Predict'}</span>
           </button>
         </form>
-        {loading && <span className="loader" aria-label="Loading"></span>}
         {uploadStatus && <p className="upload-status" aria-live="polite">{uploadStatus}</p>}
+        {showSpinner && <><br /><span className="loader"></span></>}
         {predictionResult && <p className="prediction-result" aria-live="polite">Predicted Class: {predictionResult}</p>}
-        {errorDetails && (
-          <div className="error-details" aria-live="assertive">
-            <p>{errorDetails}</p>
-            <p>Troubleshooting steps:</p>
-            <ol>
-              <li>Ensure the backend server is running on http://localhost:1002</li>
-              <li>Check if there are any error messages in the backend server logs</li>
-              <li>Verify that your firewall is not blocking the connection</li>
-              <li>Try accessing http://localhost:1002/predict directly in your browser</li>
-              <li>Check the browser console for any CORS-related errors</li>
-            </ol>
-          </div>
-        )}
+        {errorMessage && <p className="error-message" aria-live="assertive">{errorMessage}</p>}
       </div>
     </section>
   );
