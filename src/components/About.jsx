@@ -27,25 +27,25 @@ export default function About() {
 
           <h3>Technologies Used</h3>
           <ul>
-            <li><span>✔ </span><strong>Machine Learning Framework:</strong>
+            <li><span>✔ </span><strong>Machine Learning Framework: </strong>
               <a href="https://www.google.com/search?q=TensorFlow" target="_blank" rel="noreferrer">TensorFlow</a>
             </li>
             <li><span>✔ </span><strong>Image Processing:</strong>
               <a href="https://www.google.com/search?q=Pillow" target="_blank" rel="noreferrer">Pillow</a>
             </li>
-            <li><span>✔ </span><strong>Frontend:</strong>
+            <li><span>✔ </span><strong>Frontend: </strong>
               <a href="https://www.google.com/search?q=React+framework" target="_blank" rel="noreferrer">React</a>,
               <a href="https://www.google.com/search?q=HTML5" target="_blank" rel="noreferrer">HTML5</a>,
               <a href="https://www.google.com/search?q=CSS3" target="_blank" rel="noreferrer">CSS3</a>,
               <a href="https://www.google.com/search?q=JavaScript" target="_blank" rel="noreferrer">JavaScript</a>
             </li>
-            <li><span>✔ </span><strong>Backend:</strong>
+            <li><span>✔ </span><strong>Backend: </strong>
               <a href="https://www.google.com/search?q=Flask+API" target="_blank" rel="noreferrer">Flask for the API</a>,
               <a href="https://www.google.com/search?q=TensorFlow+model" target="_blank" rel="noreferrer">TensorFlow model</a>
             </li>
-            <li><span>✔ </span><strong>Deployment:</strong>
-              <a href="https://www.google.com/search?q=Vercel" target="_blank" rel="noreferrer">Vercel (frontend)</a>,
-              <a href="https://www.google.com/search?q=Render" target="_blank" rel="noreferrer">Render (Flask API backend)</a>
+            <li><span>✔ </span><strong>Deployment: </strong>
+              <a href="https://www.google.com/search?q=Vercel" target="_blank" rel="noreferrer">Vercel (frontend)</a>, 
+              <a href="https://www.google.com/search?q=Render" target="_blank" rel="noreferrer"> Render (Flask API backend)</a>
             </li>
           </ul>
 

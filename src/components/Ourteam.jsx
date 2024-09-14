@@ -76,25 +76,25 @@ export default function Contact() {
                     image="./images/team2.jpg"
                     name="Sai Suhas"
                     position="Project Lead"
-                    linkedinLink="#"
-                    githubLink="https://www.github.com/"
-                    instagramLink="https://www.instagram.com/"
+                    linkedinLink="https://www.linkedin.com/in/suhas-pisupati-b45025263"
+                    githubLink="https://github.com/Suhas-Pisupati"
+                    instagramLink="https://www.instagram.com/saisuhas747"
                 />
                 <TeamMember
                     image="./images/team3.jpg"
                     name="Jai Vardhan"
                     position="Project Lead"
-                    linkedinLink="https://linkedin.com/"
-                    githubLink="https://www.github.com/"
-                    instagramLink="https://www.instagram.com/"
+                    linkedinLink="https://www.linkedin.com/in/ponna-jaivardhan"
+                    githubLink="https://github.com/PonnaJaivardhan"
+                    instagramLink="https://www.instagram.com/jai_vardhan011"
                 />
                 <TeamMember
                     image="./images/team4.jpg"
                     name="Siva Simha Reddy"
                     position="Project Lead"
-                    linkedinLink="https://linkedin.com/"
-                    githubLink="https://www.github.com/"
-                    instagramLink="https://www.instagram.com/"
+                    linkedinLink="https://www.linkedin.com/in/ramireddy-sivasimha-reddy-b2001823a"
+                    githubLink="https://github.com/Siva1847"
+                    instagramLink="https://www.instagram.com/siva.simha"
                 />
             </div>
         </section>

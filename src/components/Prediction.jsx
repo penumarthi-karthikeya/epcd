@@ -110,7 +110,7 @@ const Prediction = () => {
     // Start timeout for spinner
     spinnerTimeoutRef.current = setTimeout(() => {
       setShowSpinner(true);
-    }, 1000); // Make sure spinner is visible immediately
+    }, 500); // Make sure spinner is visible immediately
 
     try {
       const response = await axios.post('http://localhost:1001/predict', formData, {
@@ -140,7 +140,7 @@ const Prediction = () => {
             setErrorMessage("Unexpected response format from server.");
           }
           setShowSpinner(false); // Hide spinner after result is set
-        }, 0); // 2-second delay for result display
+        }, 500); // 2-second delay for result display
 
       } else {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -183,6 +183,7 @@ const Prediction = () => {
                   required
                   id="file-input"
                   name="file"
+                  class="file-input"
                   ref={fileInputRef}
                   onChange={handleFileChange}
                   aria-label="Choose a file to upload"
@@ -208,7 +209,7 @@ const Prediction = () => {
             <span className="btn-txt">{loading ? 'Predicting...' : 'Predict'}</span>
           </button>
         </form>
-        {uploadStatus && <p className="upload-status" aria-live="polite">{uploadStatus}</p>}
+        {uploadStatus && <><br /><p className="upload-status" aria-live="polite">{uploadStatus}</p></>}
         {showSpinner && <><br /><span className="loader"></span></>}
         {predictionResult && <p className="prediction-result" aria-live="polite">Predicted Class: {predictionResult}</p>}
         {errorMessage && <p className="error-message" aria-live="assertive">{errorMessage}</p>}
