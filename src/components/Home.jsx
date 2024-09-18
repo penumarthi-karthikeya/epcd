@@ -2,7 +2,7 @@ export default function Home() {
   return (
     <section id="home" className="container hero">
       <div>
-        <h1 className="hero-title">Welcome to <span>Enhanced Pancreas Cancer Detection</span> Webiste</h1>
+        <h1 className="hero-title"><span>Enhanced Pancreas Cancer Detection</span></h1>
         <div className="hero-content">
           <div className="hero-description">
             <div>
@@ -27,7 +27,7 @@ export default function Home() {
             </div>
           </div>
           <div >
-            <img className="hero-image" src="/images/hero_image.jpeg" alt="Advanced AI and Detection" />
+            <img className="hero-image" id="hero-image" src="/images/hero_image.jpeg" alt="Advanced AI and Detection" />
           </div>
         </div>
       </div>

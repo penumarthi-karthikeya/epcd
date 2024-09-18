@@ -60,6 +60,8 @@ header {
   top: 0;
   left: 0;
   z-index: 100;
+  border-end-end-radius: 25px;
+  border-end-start-radius: 25px;
 
   nav {
     display: flex;
@@ -181,7 +183,7 @@ header {
   min-height: 90lvh !important;
   max-height: max-content !important;
   display: block;
-  border: 10px solid var(--text-color);
+  /* border: 10px solid var(--text-color); */
   padding: 25px;
 }
 
@@ -241,7 +243,8 @@ header {
     .hero-image {
       width: 300px;
       height: 400px;
-      border-radius: 50%;
+      border-radius: 10px;
+      border:3px solid var(--primary-color)
     }
   }
 }
@@ -307,14 +310,18 @@ header {
       flex-flow: column nowrap;
       gap: 10px;
       overflow-y: scroll;
-      height: 450px;
+      height: 60lvh;
+    }
+
+    .gallery-item {
+      border: 3px solid var(--primary-color);
+      border-radius: 10px;
     }
 
     .gallery-image {
-      min-height: 450px;
-      max-width: 100%;
-      border: 3px solid var(--primary-color);
       border-radius: 10px;
+      max-height: 100%;
+      max-width: 100%;
     }
 
     .about-content {
@@ -388,11 +395,13 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding:10px;
+    padding: 10px;
     border: 2px dashed var(--primary-color);
     border-radius: 10px;
     cursor: pointer;
     width: inherit;
+    height: 30lvh;
+    justify-content: center;
     transition: background-color 0.3s ease;
   }
 
@@ -477,8 +486,6 @@ header {
     border: 2px solid var(--secondary-color);
   }
 }
-
-
 @keyframes rotate {
   0% {
     transform: rotate(0deg) scale(0.8)
@@ -553,8 +560,8 @@ header {
   }
 
   img {
-    width: 20lvw;
-    height: 25lvw;
+    width: 15lvw;
+    height: 15lvw;
     border-radius: 50%;
   }
 
@@ -648,8 +655,8 @@ header {
   .example-2 .icon-content a svg {
     position: relative;
     z-index: inherit;
-    width: 30px;
-    height: 30px;
+    width: 4lvh;
+    height: 4lvh;
   }
 
   .example-2 .icon-content a:hover {
@@ -907,6 +914,7 @@ header {
     background-color: #0056b3;
   }
 }
+
 @keyframes typing {
 
   0%,
@@ -985,6 +993,17 @@ footer {
   width: 100lvw;
   z-index: 0;
   bottom: 0;
+  border-start-end-radius: 50%  ;
+  border-start-start-radius: 50%;
+}
+
+body.dark-theme .gallery-image {
+  filter: invert(1);
+}
+
+body.dark-theme .gallery-item {
+  border-color: #000;
+  /* Keep the border in its original color */
 }
 
 @media screen and (max-width: 800px) {
@@ -1016,9 +1035,11 @@ footer {
 
       .hero-description {
         font-size: inherit;
-        .hero-button{
+
+        .hero-button {
           margin: 10px;
         }
+
         .hero-image {
           max-width: 300px;
           max-height: 300px;
@@ -1039,12 +1060,11 @@ footer {
         flex-flow: row wrap;
         overflow-y: scroll;
         max-width: 100%;
-        max-height: 300px;
-      }
+        max-height: 40lvh;
 
-      .gallery-image {
-        min-height: 300px;
-        max-width:100%;
+        .gallery-item>.gallery-image {
+          max-height: 100%;
+        }
       }
 
       .about-content {
@@ -1053,33 +1073,45 @@ footer {
       }
     }
   }
-  .prediction{
+
+  .prediction {
     max-width: 100%;
-    .button.type1{
+
+    .button.type1 {
 
       width: 100%;
     }
-    .image-preview{
+
+    .image-preview {
       max-width: 250px;
     }
-    .drop-container{
+
+    .drop-container {
       width: inherit;
-      .file-input{
-  
+
+      .file-input {
+
         width: 100%;
       }
     }
   }
+
   .contact {
     img {
-      width: 30lvh;
-      height: 30lvh;
+      width: 15lvh;
+      height: 15lvh;
     }
 
     .team {
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+    .example-2 .icon-content a svg {
+      position: relative;
+      z-index: inherit;
+      width: 3lvh;
+      height: 3lvh;
     }
   }
 
@@ -1112,14 +1144,47 @@ footer {
     border-bottom: 2px solid var(--text-color);
   }
 }
-@media screen and (max-width:320px){
-  body{
+
+@media screen and (max-width:320px) {
+  body {
     font-size: small;
   }
-  .container{
+
+  .container {
     font-size: small;
   }
-  .about > .about-div > .about-content{
+
+  .about>.about-div>.about-content {
     text-align: left;
+  }
+
+  #hero-image {
+    width: 30lvh;
+    height: 30lvh;
+  }
+  .about {
+    .about-div {
+      flex-direction: column-reverse;
+
+      .gallery {
+        max-width: 100%;
+      }
+
+      .gallery_slider {
+        flex-flow: row wrap;
+        overflow-y: scroll;
+        max-width: 100%;
+        max-height: 20lvh;
+
+        .gallery-item>.gallery-image {
+          max-height: 100%;
+        }
+      }
+
+      .about-content {
+        width: 100%;
+        text-align: left;
+      }
+    }
   }
 }

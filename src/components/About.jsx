@@ -1,14 +1,20 @@
 
-export default function About() {
+export default function About() {  
   return (
     <section id="about" className="container about">
       <div className="about-div">
         <div className="gallery">
           <p className="gallery_name">Results Gallery</p>
           <ol className="gallery_slider">
-            <img src="images/Confusion_matrix.png" alt="" loading="lazy" className="gallery-image" />
-            <img src="images/cr,logloss,acc,f1score.png" alt="" loading="lazy" className="gallery-image" />
-            <img src="images/train_graph.png" alt="" loading="lazy" className="gallery-image" />
+            <div className="gallery-item">
+              <img src="images/Confusion_matrix.png" alt="" loading="lazy" className="gallery-image" />
+            </div>
+            <div className="gallery-item">
+              <img src="images/cr,logloss,acc,f1score.png" alt="" loading="lazy" className="gallery-image" />
+            </div>
+            <div className="gallery-item">
+              <img src="images/train_graph.png" alt="" loading="lazy" className="gallery-image" />
+            </div>
           </ol>
         </div>
         <div className="about-content">
@@ -21,7 +27,7 @@ export default function About() {
 
           <h3>Our Model</h3>
           <p>
-            The backbone of this project is a TensorFlow-based convolutional neural network model that has been specifically designed to analyze medical imaging data such as CT scans. The model has been trained on a carefully curated dataset to ensure high accuracy(95.87%) in detecting early signs of pancreatic cancer.
+            The backbone of this project is a TensorFlow-based convolutional neural network model that has been specifically designed to analyze medical imaging data such as CT scans. The model has been trained on a carefully curated dataset to ensure high accuracy (95.87%) in detecting early signs of pancreatic cancer.
           </p>
           <br />
 
@@ -45,7 +51,7 @@ export default function About() {
             </li>
             <li><span>✔ </span><strong>Deployment: </strong>
               <a href="https://www.google.com/search?q=Vercel" target="_blank" rel="noreferrer">Vercel (frontend)</a>, 
-              <a href="https://www.google.com/search?q=Render" target="_blank" rel="noreferrer"> Render (Flask API backend)</a>
+              <a href="https://www.google.com/search?q=Render" target="_blank" rel="noreferrer">Render (Flask API backend)</a>
             </li>
           </ul>
 
@@ -62,5 +68,4 @@ export default function About() {
       </div>
     </section>
   );
-
 }
