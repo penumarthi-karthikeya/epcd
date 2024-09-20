@@ -434,7 +434,7 @@ header {
 
   .file-name {
     font-size: inherit;
-    color: var(--primary-color);
+    color: var(--text-color);
     margin-top: 10px;
   }
 
@@ -484,6 +484,17 @@ header {
     background-color: var(--primary-color);
     transform: scale(1.05);
     border: 2px solid var(--secondary-color);
+  }
+  .dos-and-donts{
+    font-size: inherit;
+    margin: 10px;
+    text-align: justify;
+    .Dos{
+      list-style:"✅";
+    }
+    .Donts{
+      list-style:"❌";
+    }
   }
 }
 @keyframes rotate {
@@ -557,6 +568,7 @@ header {
 
   h1 {
     text-align: center;
+    margin-bottom: 20px;
   }
 
   img {
@@ -780,6 +792,15 @@ header {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .chatbot-header > svg {
+    width: 10%;
+    height: 100%;
+
   }
 
   .chatbot-header h3 {
@@ -1122,7 +1143,9 @@ body.dark-theme .gallery-item {
       bottom: 100px;
       border: 1px solid var(--text-color);
     }
-
+    .chatbot-header > svg {
+      width: 7%;
+    }
     .chatbot-modal {
       width: 90lvw;
       max-height: 90lvh;

@@ -8,12 +8,12 @@ const Prediction = () => {
   const [uploadStatus, setUploadStatus] = useState('');
   const [predictionResult, setPredictionResult] = useState('');
   const [loading, setLoading] = useState(false);
-  const [showSpinner, setShowSpinner] = useState(false); // State to show spinner
+  const [showSpinner, setShowSpinner] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const fileInputRef = useRef(null);
   const dropContainerRef = useRef(null);
-  const spinnerTimeoutRef = useRef(null); // Ref to hold the timeout ID
+  const spinnerTimeoutRef = useRef(null);
 
   const supportedFileTypes = ['image/jpeg', 'image/png'];
 
@@ -22,7 +22,6 @@ const Prediction = () => {
       if (fileURL) {
         URL.revokeObjectURL(fileURL);
       }
-      // Clean up the spinner timeout if the component unmounts before timeout completes
       if (spinnerTimeoutRef.current) {
         clearTimeout(spinnerTimeoutRef.current);
       }
@@ -56,7 +55,7 @@ const Prediction = () => {
     setUploadStatus('');
     setPredictionResult('');
     setLoading(false);
-    setShowSpinner(false); // Ensure spinner is hidden when clearing the file
+    setShowSpinner(false);
     setSelectedFile(null);
     setErrorMessage('');
   };
@@ -102,15 +101,14 @@ const Prediction = () => {
     formData.append('file', selectedFile, fileName);
 
     setLoading(true);
-    setShowSpinner(true); // Show spinner immediately
+    setShowSpinner(true);
     setPredictionResult('');
     setUploadStatus('');
     setErrorMessage('');
 
-    // Start timeout for spinner
     spinnerTimeoutRef.current = setTimeout(() => {
       setShowSpinner(true);
-    }, 500); // Make sure spinner is visible immediately
+    }, 500);
 
     try {
       const response = await axios.post('http://localhost:1001/predict', formData, {
@@ -123,31 +121,28 @@ const Prediction = () => {
       if (response.status === 200) {
         const data = response.data;
 
-        // Clear timeout if prediction is successful before delay
         if (spinnerTimeoutRef.current) {
           clearTimeout(spinnerTimeoutRef.current);
         }
 
         setLoading(false);
-        setShowSpinner(true); // Ensure spinner is still visible during the delay
+        setShowSpinner(false);
         setUploadStatus('Upload successful!');
 
-        // Add delay before setting prediction result
         setTimeout(() => {
           if (data.predicted_class) {
             setPredictionResult(data.predicted_class);
           } else {
             setErrorMessage("Unexpected response format from server.");
           }
-          setShowSpinner(false); // Hide spinner after result is set
-        }, 500); // 2-second delay for result display
-
+          setShowSpinner(false);
+        }, 500);
       } else {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
     } catch (error) {
       setLoading(false);
-      setShowSpinner(false); // Hide spinner on error
+      setShowSpinner(false);
       setUploadStatus('Error uploading file. Please try again.');
 
       let errorMsg = 'An error occurred. Please try again later.';
@@ -158,12 +153,54 @@ const Prediction = () => {
           errorMsg = error.response.data || 'An error occurred. Please try again later.';
         }
       } else if (error.message.includes('Network Error')) {
-        errorMsg = 'This service has been stoped by team,contact them to start this service.';
+        errorMsg = 'This service has been stopped by the team, contact them to start this service.';
       }
 
       setErrorMessage(errorMsg);
     }
   };
+
+  const dosAndDontsTumor = (
+    <div className="dos-and-donts">
+      <h3>Do's</h3>
+      <ul className="Dos">
+        <li>Seek medical advice immediately.</li>
+        <li>Follow a treatment plan prescribed by a specialist.</li>
+        <li>Maintain a healthy diet and stay hydrated.</li>
+        <li>Stay positive and follow up regularly with your doctor.</li>
+        <li>Engage in physical activity as recommended by your healthcare provider.</li>
+      </ul>
+      <h3>Don'ts</h3>
+      <ul className="Donts">
+        <li>Avoid self-medication without consulting a doctor.</li>
+        <li>Don't ignore any new symptoms.</li>
+        <li>Don't skip medical appointments.</li>
+        <li>Avoid smoking and excessive alcohol consumption.</li>
+        <li>Don't rely on unverified home remedies or alternative treatments without consulting a doctor.</li>
+      </ul>
+    </div>
+  );
+
+  const dosAndDontsNormal = (
+    <div className="dos-and-donts">
+      <h3>Do's</h3>
+      <ul className="Dos">
+        <li>Continue with regular check-ups.</li>
+        <li>Maintain a healthy lifestyle.</li>
+        <li>Stay physically active.</li>
+        <li>Eat a balanced diet rich in fruits and vegetables.</li>
+        <li>Stay informed about health updates and prevention measures.</li>
+      </ul>
+      <h3>Don'ts</h3>
+      <ul className='Donts' >
+        <li>Don't ignore future symptoms, even if they seem mild.</li>
+        <li>Avoid processed foods and sugary drinks.</li>
+        <li>Don't smoke or use tobacco products.</li>
+        <li>Avoid excessive stress; practice relaxation techniques.</li>
+        <li>Don't skip regular health screenings.</li>
+      </ul>
+    </div>
+  );
 
   return (
     <section id="prediction" className="container">
@@ -173,9 +210,15 @@ const Prediction = () => {
             <>
               <span className="form-title">Upload your Pancreas MRI</span>
               <p className="form-paragraph">File should be a JPEG or PNG image</p>
-              <label htmlFor="file-input" className="drop-container" ref={dropContainerRef}
-                onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}
-                aria-describedby="file-input-description">
+              <label
+                htmlFor="file-input"
+                className="drop-container"
+                ref={dropContainerRef}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+                aria-describedby="file-input-description"
+              >
                 <span className="drop-title">Drop file here</span> or
                 <input
                   type="file"
@@ -183,7 +226,7 @@ const Prediction = () => {
                   required
                   id="file-input"
                   name="file"
-                  class="file-input"
+                  className="file-input"
                   ref={fileInputRef}
                   onChange={handleFileChange}
                   aria-label="Choose a file to upload"
@@ -211,7 +254,12 @@ const Prediction = () => {
         </form>
         {uploadStatus && <><br /><p className="upload-status" aria-live="polite">{uploadStatus}</p></>}
         {showSpinner && <><br /><span className="loader"></span></>}
-        {predictionResult && <p className="prediction-result" aria-live="polite">Predicted Class: {predictionResult}</p>}
+        {predictionResult && (
+          <>
+            <p className="prediction-result" aria-live="polite">Predicted Class: {predictionResult}</p>
+            {predictionResult === 'tumor' ? dosAndDontsTumor : dosAndDontsNormal}
+          </>
+        )}
         {errorMessage && <p className="error-message" aria-live="assertive">{errorMessage}</p>}
       </div>
     </section>
