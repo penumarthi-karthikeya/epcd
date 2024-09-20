@@ -13,7 +13,7 @@
     ],
     "name": "EPCD-React-App",
     "short_name": "Epcd",
-    "theme_color": "#00A2B8 ",
+    "theme_color": "#00A2B8",
     "background_color": "#00A2B8",
     "display": "standalone",
     "scope": "/",
