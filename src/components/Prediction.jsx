@@ -111,7 +111,7 @@ const Prediction = () => {
     }, 500);
 
     try {
-      const response = await axios.post('http://localhost:1001/predict', formData, {
+      const response = await axios.post('https://pcp-api-zrdo.onrender.com/predict', formData, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'multipart/form-data',
