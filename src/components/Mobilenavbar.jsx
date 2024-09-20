@@ -27,8 +27,8 @@ export default function Mobilenavbar() {
                 case 'prediction':
                     setActiveLink('prediction');
                     break;
-                case 'contact':
-                    setActiveLink('contact');
+                case 'our_team':
+                    setActiveLink('our_team');
                     break;
                 default:
                     setActiveLink('home'); // Default to home if no section matches
@@ -93,9 +93,9 @@ export default function Mobilenavbar() {
             </a>
 
             <a
-                href="#contact"
-                className={`nav-link ${activeLink === 'contact' ? 'active' : ''}`}
-                onClick={() => handleLinkClick('contact')}
+                href="#our_team"
+                className={`nav-link ${activeLink === 'our_team' ? 'active' : ''}`}
+                onClick={() => handleLinkClick('our_team')}
             >
                 <div className="icon-text">
                     <svg className="nav-icon" viewBox="0 0 24 24">
