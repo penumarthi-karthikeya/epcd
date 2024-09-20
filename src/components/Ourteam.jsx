@@ -61,7 +61,7 @@ const TeamMember = ({
 
 export default function Contact() {
     return (
-        <section id="contact" className="container contact">
+        <section id="Our_team" className="container contact">
             <h1>Our Team</h1>
             <div className="team">
                 <TeamMember

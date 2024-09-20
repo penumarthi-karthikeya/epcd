@@ -162,42 +162,44 @@ const Prediction = () => {
 
   const dosAndDontsTumor = (
     <div className="dos-and-donts">
-      <h3>Do's</h3>
+      <h3><strong>Recommendations</strong></h3>
       <ul className="Dos">
-        <li>Seek medical advice immediately.</li>
-        <li>Follow a treatment plan prescribed by a specialist.</li>
-        <li>Maintain a healthy diet and stay hydrated.</li>
-        <li>Stay positive and follow up regularly with your doctor.</li>
-        <li>Engage in physical activity as recommended by your healthcare provider.</li>
+        <li>Follow up regularly with your healthcare provider for ongoing assessment.</li>
+        <li>Maintain a nutrient-rich diet tailored to support your overall health.</li>
+        <li>Adhere strictly to prescribed treatment regimens and medications.</li>
+        <li>Keep detailed records of your health status and any new symptoms.</li>
+        <li>Prioritize mental health by incorporating stress-reduction techniques.</li>
       </ul>
-      <h3>Don'ts</h3>
+      <br />
+      <h3><strong>Advisories</strong></h3>
       <ul className="Donts">
-        <li>Avoid self-medication without consulting a doctor.</li>
-        <li>Don't ignore any new symptoms.</li>
-        <li>Don't skip medical appointments.</li>
-        <li>Avoid smoking and excessive alcohol consumption.</li>
-        <li>Don't rely on unverified home remedies or alternative treatments without consulting a doctor.</li>
+        <li>Avoid delaying or missing scheduled medical consultations or treatments.</li>
+        <li>Limit or eliminate alcohol and tobacco use to prevent complications.</li>
+        <li>Refrain from strenuous physical activities unless approved by your physician.</li>
+        <li>Avoid excessive intake of high-fat, high-sugar foods that may aggravate your condition.</li>
+        <li>Do not disregard new or unusual symptoms; report them promptly to your healthcare provider.</li>
       </ul>
     </div>
   );
 
   const dosAndDontsNormal = (
     <div className="dos-and-donts">
-      <h3>Do's</h3>
+      <h3><strong>Recommendations</strong></h3>
       <ul className="Dos">
-        <li>Continue with regular check-ups.</li>
-        <li>Maintain a healthy lifestyle.</li>
-        <li>Stay physically active.</li>
-        <li>Eat a balanced diet rich in fruits and vegetables.</li>
-        <li>Stay informed about health updates and prevention measures.</li>
+        <li>Continue adhering to a balanced diet to promote long-term pancreatic health.</li>
+        <li>Engage in regular, moderate physical activity for overall well-being.</li>
+        <li>Schedule periodic medical check-ups to monitor your health proactively.</li>
+        <li>Ensure proper hydration to support metabolic functions.</li>
+        <li>Practice mindfulness and stress management techniques to maintain mental resilience.</li>
       </ul>
-      <h3>Don'ts</h3>
+      <br />
+      <h3><strong>Advisories</strong></h3>
       <ul className='Donts' >
-        <li>Don't ignore future symptoms, even if they seem mild.</li>
-        <li>Avoid processed foods and sugary drinks.</li>
-        <li>Don't smoke or use tobacco products.</li>
-        <li>Avoid excessive stress; practice relaxation techniques.</li>
-        <li>Don't skip regular health screenings.</li>
+        <li>Avoid excessive consumption of processed foods and unhealthy fats.</li>
+        <li>Do not ignore early signs of gastrointestinal or abdominal discomfort.</li>
+        <li>Abstain from smoking and limit alcohol intake to reduce future health risks.</li>
+        <li>Stay committed to routine health assessments, even when feeling well.</li>
+        <li>Refrain from self-medicating or using supplements without professional consultation.</li>
       </ul>
     </div>
   );

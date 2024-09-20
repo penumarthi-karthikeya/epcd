@@ -39,11 +39,6 @@ const Header = () => {
           aboutSection.scrollIntoView({ behavior: 'smooth' });
         }
       }
-
-      // Check if the pressed key is 't' or spacebar
-      if (event.key === 't' || event.code === 'Space') {
-        handleThemeChange();
-      }
     };
 
     // Initialize the document title and add event listeners
