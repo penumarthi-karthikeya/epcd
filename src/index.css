@@ -1082,8 +1082,8 @@ footer {
   width: 100lvw;
   z-index: 0;
   bottom: 0;
-  border-start-end-radius: 50%;
-  border-start-start-radius: 50%;
+  border-start-end-radius: 10px;
+  border-start-start-radius: 10px;
 }
 
 body.dark-theme .gallery-image {
