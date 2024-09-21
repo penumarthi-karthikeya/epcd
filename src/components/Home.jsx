@@ -24,7 +24,7 @@ export default function Home() {
             <div className='hero-buttons'>
               <a href="#prediction" className="hero-button">Get Started</a>
               <a href="#about" className="hero-button">Discover Our Work</a>
-              <a href="/epcd.apk" className="hero-button" download>Download APK</a>
+              <a href="/epcd.apk" className="hero-button" download>Get App</a>
 
             </div>
           </div>
