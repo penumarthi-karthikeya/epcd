@@ -18,12 +18,14 @@ const Prediction = () => {
   const supportedFileTypes = ['image/jpeg', 'image/png'];
 
   useEffect(() => {
+    const currentSpinnerTimeout = spinnerTimeoutRef.current; // Copy ref value
+
     return () => {
       if (fileURL) {
         URL.revokeObjectURL(fileURL);
       }
-      if (spinnerTimeoutRef.current) {
-        clearTimeout(spinnerTimeoutRef.current);
+      if (currentSpinnerTimeout) {
+        clearTimeout(currentSpinnerTimeout); // Use the copied variable
       }
     };
   }, [fileURL]);
@@ -94,6 +96,8 @@ const Prediction = () => {
 
     if (!selectedFile) {
       setErrorMessage("No file selected.");
+      setLoading(false);
+      setShowSpinner(false);
       return;
     }
 
@@ -106,10 +110,6 @@ const Prediction = () => {
     setUploadStatus('');
     setErrorMessage('');
 
-    spinnerTimeoutRef.current = setTimeout(() => {
-      setShowSpinner(true);
-    }, 500);
-
     try {
       const response = await axios.post('https://pcp-api-zrdo.onrender.com/predict', formData, {
         headers: {
@@ -121,26 +121,20 @@ const Prediction = () => {
       if (response.status === 200) {
         const data = response.data;
 
-        if (spinnerTimeoutRef.current) {
-          clearTimeout(spinnerTimeoutRef.current);
-        }
-
         setLoading(false);
         setShowSpinner(false);
         setUploadStatus('Upload successful!');
 
-        setTimeout(() => {
-          if (data.predicted_class) {
-            setPredictionResult(data.predicted_class);
-          } else {
-            setErrorMessage("Unexpected response format from server.");
-          }
-          setShowSpinner(false);
-        }, 500);
+        if (data.predicted_class) {
+          setPredictionResult(data.predicted_class);
+        } else {
+          setErrorMessage("Unexpected response format from server.");
+        }
       } else {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
     } catch (error) {
+      // Set loading and spinner states to false on error
       setLoading(false);
       setShowSpinner(false);
       setUploadStatus('Error uploading file. Please try again.');
@@ -156,9 +150,10 @@ const Prediction = () => {
         errorMsg = 'This service has been stopped by the team, contact them to start this service.';
       }
 
-      setErrorMessage(errorMsg);
+      setErrorMessage(errorMsg); // Display error message
     }
   };
+
 
   const dosAndDontsTumor = (
     <div className="dos-and-donts">
