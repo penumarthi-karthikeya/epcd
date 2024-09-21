@@ -67,7 +67,7 @@ export default function Contact() {
                 <TeamMember
                     image="./images/team1.jpg"
                     name="Karthikeya"
-                    position="Project Lead"
+                    position="Software Developer"
                     linkedinLink="https://www.linkedin.com/in/penumarthi-karthikeya/"
                     githubLink="https://www.github.com/penumarthi-karthikeya"
                     instagramLink="https://www.instagram.com/simply_karthikeya"
@@ -75,7 +75,7 @@ export default function Contact() {
                 <TeamMember
                     image="./images/team2.jpg"
                     name="Sai Suhas"
-                    position="Project Lead"
+                    position="UI/UX Designer"
                     linkedinLink="https://www.linkedin.com/in/suhas-pisupati-b45025263"
                     githubLink="https://github.com/Suhas-Pisupati"
                     instagramLink="https://www.instagram.com/saisuhas747"
@@ -83,7 +83,7 @@ export default function Contact() {
                 <TeamMember
                     image="./images/team3.jpg"
                     name="Jai Vardhan"
-                    position="Project Lead"
+                    position="Research Analyst"
                     linkedinLink="https://www.linkedin.com/in/ponna-jaivardhan"
                     githubLink="https://github.com/PonnaJaivardhan"
                     instagramLink="https://www.instagram.com/jai_vardhan011"
@@ -91,7 +91,7 @@ export default function Contact() {
                 <TeamMember
                     image="./images/team4.jpg"
                     name="Siva Simha Reddy"
-                    position="Project Lead"
+                    position="Technical Writer"
                     linkedinLink="https://www.linkedin.com/in/ramireddy-sivasimha-reddy-b2001823a"
                     githubLink="https://github.com/Siva1847"
                     instagramLink="https://www.instagram.com/siva.simha"
