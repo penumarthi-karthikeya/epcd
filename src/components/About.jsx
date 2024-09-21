@@ -15,6 +15,9 @@ export default function About() {
             <div className="gallery-item">
               <img src="images/train_graph.png" alt="" loading="lazy" className="gallery-image" />
             </div>
+            <div className="gallery-item">
+              <img src="images/model_visualization.png" alt="" loading="lazy" className="gallery-image" />
+            </div>
           </ol>
         </div>
         <div className="about-content">
