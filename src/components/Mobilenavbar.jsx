@@ -35,7 +35,7 @@ export default function Mobilenavbar() {
             }
 
             // Update the document title with the prefix
-            document.title = `EPCP - ${capitalizeFirstLetter(currentSectionId || 'home')}`;
+            document.title = `EPCD - ${capitalizeFirstLetter(currentSectionId || 'home')}`;
         };
 
         window.addEventListener('scroll', handleScroll);
