@@ -254,7 +254,7 @@ const Prediction = () => {
         {predictionResult && (
           <>
             <p className="prediction-result" aria-live="polite">Predicted Class: {predictionResult}</p>
-            {predictionResult === 'tumor' ? dosAndDontsTumor : dosAndDontsNormal}
+            {predictionResult === 'pancreatic_tumor' ? dosAndDontsTumor : dosAndDontsNormal}
           </>
         )}
         {errorMessage && <p className="error-message" aria-live="assertive">{errorMessage}</p>}
